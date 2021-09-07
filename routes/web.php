@@ -53,6 +53,7 @@ Route::group(['prefix'=>'admin','middleware'=>['isAdmin','auth','PreventBackHist
     Route::get('profile',[AdminController::class,'profile'])->name('admin.profile');
 
     Route::post('update-profile-info',[AdminController::class,'updateInfo'])->name('adminUpdateInfo');
+    Route::post('update-profile-picture',[AdminController::class, 'updatePicture'])->name('adminUpdatePicture');
 });
 
 Route::group(['prefix'=>'user','middleware'=>['isUser','auth','PreventBackHistory']], function(){

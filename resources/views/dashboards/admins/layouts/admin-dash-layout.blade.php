@@ -1,8 +1,4 @@
 <!DOCTYPE html>
-<!--
-This is a starter template page. Use this page to start your new project from
-scratch. This page gets rid of all links and provides the needed markup only.
--->
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -48,11 +44,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
-    <!-- Brand Logo -->
-    <a href="{{ \URL::to('/')}}" class="brand-link">
-      <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">Your Site</span>
-    </a>
+
 
     <!-- Sidebar -->
     <div class="sidebar">
@@ -62,7 +54,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <img src="{{ Auth::user()->picture }}" class="img-circle elevation-2 admin_picture" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block admin_name">{{ Auth::user()->name }}</a>
+          <a class="d-block admin_name" style="cursor:pointer">{{ Auth::user()->name }}</a>
         </div>
       </div>
 
@@ -71,8 +63,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column nav-legacy nav-compact nav-child-indent nav-collapse-hide-child nav-flat" data-widget="treeview" role="menu" data-accordion="false">
-          <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
+
                <li class="nav-item">
                 <a href="{{ route('admin.dashboard')}}" class="nav-link {{ (request()->is('admin/dashboard*')) ? 'active' : '' }}">
                   <i class="nav-icon fas fa-home"></i>
@@ -110,18 +101,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <p>Sidebar content</p>
     </div>
   </aside>
-  <!-- /.control-sidebar -->
-
+ 
   <!-- Main Footer -->
   <footer class="main-footer">
-    <!-- To the right -->
-
-    <!-- Default to the left -->
-  </footer>
+  
+    </footer>
 </div>
-<!-- ./wrapper -->
-
-<!-- REQUIRED SCRIPTS -->
+ 
 
 <!-- jQuery -->
 <script src="plugins/jquery/jquery.min.js"></script>
@@ -132,10 +118,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script src="dist/js/adminlte.min.js"></script>
 
 {{-- CUSTOM JS CODES --}}
-
 <script>
-
-
   $.ajaxSetup({
      headers:{
        'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')
@@ -170,49 +153,26 @@ scratch. This page gets rid of all links and provides the needed markup only.
            }
         });
     });
-//     $(document).on('click','#change_picture_btn', function(){
-//       $('#admin_image').click();
-//     });
-//     $('#admin_image').ijaboCropTool({
-//           preview : '.admin_picture',
-//           setRatio:1,
-//           allowedExtensions: ['jpg', 'jpeg','png'],
-//           buttonsText:['CROP','QUIT'],
-//           buttonsColor:['#30bf7d','#ee5155', -15],
-//           // withCSRF:['_token','{{ csrf_token() }}'],
-//           onSuccess:function(message, element, status){
-//              alert(message);
-//           },
-//           onError:function(message, element, status){
-//             alert(message);
-//           }
-//        });
-//     $('#changePasswordAdminForm').on('submit', function(e){
-//          e.preventDefault();
-//          $.ajax({
-//             url:$(this).attr('action'),
-//             method:$(this).attr('method'),
-//             data:new FormData(this),
-//             processData:false,
-//             dataType:'json',
-//             contentType:false,
-//             beforeSend:function(){
-//               $(document).find('span.error-text').text('');
-//             },
-//             success:function(data){
-//               if(data.status == 0){
-//                 $.each(data.error, function(prefix, val){
-//                   $('span.'+prefix+'_error').text(val[0]);
-//                 });
-//               }else{
-//                 $('#changePasswordAdminForm')[0].reset();
-//                 alert(data.msg);
-//               }
-//             }
-//          });
-//     });
-    
-//   });
+    $(document).on('click','#change_picture_btn', function(){
+      $('#admin_image').click();
+    });
+
+    $('#admin_image').ijaboCropTool({
+          preview : '.admin_picture',
+          setRatio:1,
+          allowedExtensions: ['jpg', 'jpeg','png'],
+          buttonsText:['CROP','QUIT'],
+          buttonsColor:['#30bf7d','#ee5155', -15],
+          processUrl:'{{ route ("adminUpdatePicture") }}',
+          onSuccess:function(message, element, status){
+             alert(message);
+          },
+          onError:function(message, element, status){
+            alert(message);
+          }
+       });
+
+  });
 </script>
 </body>
 </html>
