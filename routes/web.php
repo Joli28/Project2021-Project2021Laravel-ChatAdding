@@ -52,8 +52,12 @@ Route::group(['prefix'=>'admin','middleware'=>['isAdmin','auth','PreventBackHist
     Route::get('dashboard',[AdminController::class,'index'])->name('admin.dashboard');
     Route::get('profile',[AdminController::class,'profile'])->name('admin.profile');
 
+    Route::post('edit',[AdminController::class,'edit'])->name('admin.edit');
+    Route::post('delete/{id}',[AdminController::class,'destroy'])->name('admin.destroy');
+    Route::post('create',[AdminController::class,'create'])->name('admin.create');
+
     Route::post('update-profile-info',[AdminController::class,'updateInfo'])->name('adminUpdateInfo');
-    Route::post('update-profile-picture',[AdminController::class, 'updatePicture'])->name('adminUpdatePicture');
+    Route::post('change-profile-picture',[AdminController::class, 'updatePicture'])->name('adminPictureUpdate');
 });
 
 Route::group(['prefix'=>'user','middleware'=>['isUser','auth','PreventBackHistory']], function(){

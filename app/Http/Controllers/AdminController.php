@@ -5,20 +5,30 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
 
 class AdminController extends Controller
 {
-    function index()
+    public function index()
     {
-        return view('dashboards.admins.index');
+        return view('dashboards.admins.index', ['users'=> User::paginate(10)]);
     }
-    function profile()
+    public function edit($id){
+
+    }
+    public function destroy($id){
+       $delete =  User::find($id)->destroy();
+        return redirect(route('dashboards.admins.index'));
+    }
+    public function create(){
+        
+    }
+    public function profile()
     {
         return view('dashboards.admins.profile');
     }
-    function updateInfo(Request $request)
+    public function updateInfo(Request $request)
     {
         $validator = Validator::make($request->all(),[
             'name'=>'required',
@@ -40,7 +50,7 @@ class AdminController extends Controller
              }
         }
     }
-    function updatePicture(Request $request){
+    public function updatePicture(Request $request){
         $path = 'users/images/';
         $file = $request->file('admin_image');
         $new_name = 'UIMG_'.date('Ymd').uniqid().'.jpg';
@@ -55,22 +65,22 @@ class AdminController extends Controller
             $oldPicture = User::find(Auth::user()->id)->getAttributes()['picture'];
 
             if( $oldPicture != '' ){
-                if( Storage::exists(public_path($path.$oldPicture))){
-                    Storage::delete(public_path($path.$oldPicture));
+                if( File::exists(public_path($path.$oldPicture))){
+                    File::delete(public_path($path.$oldPicture));
                 }
             }
 
             //Update DB
             $update = User::find(Auth::user()->id)->update(['picture'=>$new_name]);
 
-            if( !$upload ){
+            if( !$update ){
                 return response()->json(['status'=>0,'msg'=>'Something went wrong, updating picture in db failed.']);
             }else{
                 return response()->json(['status'=>1,'msg'=>'Your profile picture has been updated successfully']);
             }
         }
     }
-
+    
     
 
 
