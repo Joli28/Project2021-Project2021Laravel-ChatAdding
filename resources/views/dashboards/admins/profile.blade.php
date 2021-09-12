@@ -3,8 +3,6 @@
 
 @section('content')
 
-
-    <!-- Content Header (Page header) -->
     <section class="content-header">
         <div class="container-fluid">
           <div class="row mb-2">
@@ -18,16 +16,14 @@
               </ol>
             </div>
           </div>
-        </div><!-- /.container-fluid -->
+        </div>
       </section>
   
-      <!-- Main content -->
       <section class="content">
         <div class="container-fluid">
           <div class="row">
             <div class="col-md-3">
   
-              <!-- Profile Image -->
               <div class="card card-primary card-outline">
                 <div class="card-body box-profile">
                   <div class="text-center">
@@ -42,20 +38,17 @@
                   <a href="javascript:void(0)" class="btn btn-primary btn-block" id="change_picture_btn"><b>Change picture</b></a>
                   
                 </div>
-                <!-- /.card-body -->
               </div>
-              <!-- /.card -->
   
           
             </div>
-            <!-- /.col -->
             <div class="col-md-9">
               <div class="card">
                 <div class="card-header p-2">
                   <ul class="nav nav-pills">
                     <li class="nav-item"><a class="nav-link active" href="#personal_info" data-toggle="tab">Personal Information</a></li>
                   </ul>
-                </div><!-- /.card-header -->
+                </div>
                 <div class="card-body">
                   <div class="tab-content">
                     <div class="active tab-pane" id="personal_info">
@@ -77,24 +70,18 @@
                         </div>
                         <div class="form-group row">
                           <div class="offset-sm-2 col-sm-10">
-                            <button type="submit" class="btn btn-danger">Save Changes</button>
+                            <button type="submit" class="btn btn-success">Save Changes</button>
                           </div>
                         </div>
                       </form>
                     </div>
-                    <!-- /.tab-pane -->
   
-                  <!-- /.tab-content -->
-                </div><!-- /.card-body -->
+                </div>
               </div>
-              <!-- /.card -->
             </div>
-            <!-- /.col -->
           </div>
-          <!-- /.row -->
-        </div><!-- /.container-fluid -->
+        </div>
       </section>
-      <!-- /.content -->
     
 
 @endsection

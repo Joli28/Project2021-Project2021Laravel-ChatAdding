@@ -12,7 +12,7 @@ class UserController extends Controller
 {
     function index(){
       
-       return view('dashboards.admins.index');
+        return view('dashboards.users.index', ['users'=> User::paginate(10)]);
     }
     function profile(){
         return view('dashboards.users.profile');

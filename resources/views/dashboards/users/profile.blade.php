@@ -77,7 +77,7 @@
                         </div>
                         <div class="form-group row">
                           <div class="offset-sm-2 col-sm-10">
-                            <button type="submit" class="btn btn-danger">Save Changes</button>
+                            <button type="submit" class="btn btn-success">Save Changes</button>
                           </div>
                         </div>
                       </form>

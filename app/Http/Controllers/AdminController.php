@@ -14,6 +14,38 @@ class AdminController extends Controller
     {
         return view('dashboards.admins.index', ['users'=> User::paginate(10)]);
     }
+    // public function store(Request $request)
+    // {
+    //     $validator = Validator::make($request->all(), [
+    //         'id' => 'required|255',
+    //         'name' => 'required|max:191',
+    //         'email' => 'required|max:191',
+    //         'picture' => 'required|image|mimes:jpeg,png,jpg|max:2048'
+    //     ]);
+    //     if($validator->fails()){
+    //         return response()->json([
+    //         'status'=>400,
+    //         'errors'=>$validator->messages()
+    //         ]);
+    //     } else {
+    //         $users = new User;
+    //         $users->id = $request->input('id');
+    //         $users->name = $request->input('name');
+    //         $users->email = $request->input('email');
+    //         if($request->hasFile('image')){
+    //             $extension = $file->getClientOriginalExtension(); 
+    //             $filename = time() . '.' .$extension;
+    //             $file->move('users/images', $filename);
+    //             $users->picture = $filename;
+    //         }
+    //         $users->save();
+
+    //         return response()->json([
+    //             'status'=>200,
+    //             'message'=>'Employee Image Added Successfully'
+    //         ]);
+    //     }
+    // }
     public function edit($id){
 
     }
@@ -65,22 +97,21 @@ class AdminController extends Controller
             $oldPicture = User::find(Auth::user()->id)->getAttributes()['picture'];
 
             if( $oldPicture != '' ){
-                if( File::exists(public_path($path.$oldPicture))){
-                    File::delete(public_path($path.$oldPicture));
+                if( \File::exists(public_path($path.$oldPicture))){
+                    \File::delete(public_path($path.$oldPicture));
                 }
             }
 
             //Update DB
             $update = User::find(Auth::user()->id)->update(['picture'=>$new_name]);
 
-            if( !$update ){
+            if( !$upload ){
                 return response()->json(['status'=>0,'msg'=>'Something went wrong, updating picture in db failed.']);
             }else{
                 return response()->json(['status'=>1,'msg'=>'Your profile picture has been updated successfully']);
             }
         }
     }
-    
     
 
 

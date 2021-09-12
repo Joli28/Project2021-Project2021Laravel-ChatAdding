@@ -7,20 +7,18 @@
   <title>@yield('title')</title>
   <base href="{{ \URL::to('/') }}">
 
-  <!-- Google Font: Source Sans Pro -->
+
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-  <!-- Font Awesome Icons -->
+
   <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
    <link rel="stylesheet" href="{{ asset('plugins/ijaboCropTool/ijaboCropTool.min.css') }}">
-  <!-- Theme style -->
+
   <link rel="stylesheet" href="dist/css/adminlte.min.css">
 </head>
 <body class="sidebar-mini layout-fixed text-sm">
 <div class="wrapper">
 
-  <!-- Navbar -->
   <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-    <!-- Left navbar links -->
     <ul class="navbar-nav">
       <li class="nav-item">
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
@@ -40,15 +38,11 @@
 
 
   </nav>
-  <!-- /.navbar -->
 
-  <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
 
 
-    <!-- Sidebar -->
     <div class="sidebar">
-      <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
           <img src="{{ Auth::user()->picture }}" class="img-circle elevation-2 admin_picture" alt="User Image">
@@ -60,7 +54,6 @@
 
 
 
-      <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column nav-legacy nav-compact nav-child-indent nav-collapse-hide-child nav-flat" data-widget="treeview" role="menu" data-accordion="false">
 
@@ -82,39 +75,29 @@
               </li>
         </ul>
       </nav>
-      <!-- /.sidebar-menu -->
     </div>
-    <!-- /.sidebar -->
   </aside>
 
-  <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
   @yield('content')
   </div>
-  <!-- /.content-wrapper -->
 
-  <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
-    <!-- Control sidebar content goes here -->
     <div class="p-3">
       <h5>Title</h5>
       <p>Sidebar content</p>
     </div>
   </aside>
  
-  <!-- Main Footer -->
   <footer class="main-footer">
   
     </footer>
 </div>
  
 
-<!-- jQuery -->
 <script src="plugins/jquery/jquery.min.js"></script>
-<!-- Bootstrap 4 -->
 <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="{{ asset('plugins/ijaboCropTool/ijaboCropTool.min.js') }}"></script>
-<!-- AdminLTE App -->
 <script src="dist/js/adminlte.min.js"></script>
 
 {{-- CUSTOM JS CODES --}}
@@ -153,13 +136,14 @@
                 }
            }
         });
-    });
- 
+    }); 
+
     $(document).on('click','#change_picture_btn', function(){
       $('#admin_image').click();
     });
+ 
     $('#admin_image').ijaboCropTool({
-          preview : '.admin_picture',
+          preview : '',
           setRatio:1,
           allowedExtensions: ['jpg', 'jpeg','png'],
           buttonsText:['CROP','QUIT'],
@@ -173,7 +157,7 @@
             alert(message);
           }
        });
-
+ 
   });
 </script>
 </body>
