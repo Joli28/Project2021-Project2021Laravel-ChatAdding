@@ -61,6 +61,7 @@
       </div>
 
       <form id="AddEmployeeForm" method="POST" enctype="multipart/form-data">
+      @csrf
       <div class="modal-body">
           <ul class="alert alert-warning d-none" id="save_errorList"></ul>
         <div class="form-group mb-3">
@@ -76,7 +77,7 @@
             <input type="text" name="email" class="form-control">
         </div>
         <div class="form-group mb-3">
-            <label>Picture</label>
+            <label>Image</label>
             <input type="file" name="image" class="form-control">
         </div>
       </div>
@@ -117,6 +118,12 @@
 
 <script>
     $(document).ready(function(){
+                $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
         $(document).on('submit', '#AddEmployeeForm', function(e){
             e.preventDefault();
 
@@ -130,14 +137,21 @@
                 contentType: false,
                 processData: false,
                 success: function(response){
-                    // if(response.status == 400){
+                    if(response.status == 400){
 
-                    //     $('#save_errorList').html("");
-                    //     $('#save_errorList').removeClass('d-none');
-                    //     $.each(response.errors, function(key, err_value){
-                    //         $('#save_errorList').append('<li>'+err_value+'</li>');
-                    //     });
-                    // }
+                        $('#save_errorList').html("");
+                        $('#save_errorList').removeClass('d-none');
+                        $.each(response.errors, function(key, err_value){
+                            $('#save_errorList').append('<li>'+err_value+'</li>');
+                        });
+                    }
+                    else if(response.status == 200){
+                        $('#save_errorList').html("");
+                        $('#save_errorList').removeClass('d-none');
+                        this.reset();
+                        $('#AddEmployeeModal').modal('hide');
+                        alert(response.message);
+                    }
                 }
             });
         });

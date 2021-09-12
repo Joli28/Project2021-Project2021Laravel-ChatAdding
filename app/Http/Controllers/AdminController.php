@@ -14,38 +14,40 @@ class AdminController extends Controller
     {
         return view('dashboards.admins.index', ['users'=> User::paginate(10)]);
     }
-    // public function store(Request $request)
-    // {
-    //     $validator = Validator::make($request->all(), [
-    //         'id' => 'required|255',
-    //         'name' => 'required|max:191',
-    //         'email' => 'required|max:191',
-    //         'picture' => 'required|image|mimes:jpeg,png,jpg|max:2048'
-    //     ]);
-    //     if($validator->fails()){
-    //         return response()->json([
-    //         'status'=>400,
-    //         'errors'=>$validator->messages()
-    //         ]);
-    //     } else {
-    //         $users = new User;
-    //         $users->id = $request->input('id');
-    //         $users->name = $request->input('name');
-    //         $users->email = $request->input('email');
-    //         if($request->hasFile('image')){
-    //             $extension = $file->getClientOriginalExtension(); 
-    //             $filename = time() . '.' .$extension;
-    //             $file->move('users/images', $filename);
-    //             $users->picture = $filename;
-    //         }
-    //         $users->save();
+    public function store(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'id' => 'required',
+            'name' => 'required',
+            'email' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg'
+        ]);
+        if($validator->fails()){
+            return response()->json([
+            'status'=>400,
+            'errors'=>$validator->messages()
+            ]);
+        } else {
+            $users = new User;
+            $users->id = $request->input('id');
+            $users->name = $request->input('name');
+            $users->email = $request->input('email');
+            if($request->hasFile('image')){
+                
+                $file = $request->file('image');
+                $extension = $file->getClientOriginalExtension(); 
+                $filename = time() . '.' .$extension;
+                $file->move('users/images/', $filename);
+                $users->image = $filename;
+            }
+            $users->save();
 
-    //         return response()->json([
-    //             'status'=>200,
-    //             'message'=>'Employee Image Added Successfully'
-    //         ]);
-    //     }
-    // }
+            return response()->json([
+                'status'=>200,
+                'message'=>'Employee Image Added Successfully'
+            ]);
+        }
+    }
     public function edit($id){
 
     }

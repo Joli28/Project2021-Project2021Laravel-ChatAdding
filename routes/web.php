@@ -15,7 +15,7 @@ Route::middleware(['middleware'=>'PreventBackHistory'])->group(function (){
  
 Route::group(['prefix'=>'admin','middleware'=>['isAdmin','auth','PreventBackHistory']], function(){
     Route::get('dashboard',[AdminController::class,'index'])->name('admin.dashboard');
-    // Route::get('dashboard',[AdminController::class,'store'])->name('admin.dashboard');
+    Route::post('dashboard',[AdminController::class,'store'])->name('admin.dashboard');
 
     Route::get('profile',[AdminController::class,'profile'])->name('admin.profile');
 
