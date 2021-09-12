@@ -20,7 +20,7 @@ class AdminController extends Controller
             'id' => 'required',
             'name' => 'required',
             'email' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg'
+            'picture' => 'required|image|mimes:jpeg,png,jpg'
         ]);
         if($validator->fails()){
             return response()->json([
@@ -37,8 +37,8 @@ class AdminController extends Controller
                 $file = $request->file('image');
                 $extension = $file->getClientOriginalExtension(); 
                 $filename = time() . '.' .$extension;
-                $file->move('users/images/', $filename);
-                $users->image = $filename;
+                $file->move('users/images', $filename);
+                $users->picture = $filename;
             }
             $users->save();
 

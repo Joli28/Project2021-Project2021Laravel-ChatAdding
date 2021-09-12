@@ -103,7 +103,23 @@
                 <div class="card-body">
                     <div class="table-responsive">
                         <table>
-
+                            <thead>
+                                <tr>
+                                    <th>Id<th>
+                                    <th>Name<th>
+                                    <th>Email<th>
+                                    <th>Image<th>
+                                    <th>Edit<th>
+                                    <th>Delete<th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            </tbody>
                         </table>
                     </div>
                 </div>
@@ -148,7 +164,8 @@
                     else if(response.status == 200){
                         $('#save_errorList').html("");
                         $('#save_errorList').removeClass('d-none');
-                        this.reset();
+                        // this.reset();
+                        $('#AddEmployeeForm').find('input').val('');
                         $('#AddEmployeeModal').modal('hide');
                         alert(response.message);
                     }
