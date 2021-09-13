@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Validator;
 class UserController extends Controller
 {
     function index(){
-      
+
         return view('dashboards.users.index', ['users'=> User::paginate(10)]);
     }
     function profile(){
@@ -46,21 +46,23 @@ class UserController extends Controller
 
         //Upload new image
         $upload = $file->move(public_path($path), $new_image_name);
-        
+
         if( !$upload ){
             return response()->json(['status'=>0,'msg'=>'Something went wrong, upload new picture failed.']);
         }else{
+            //find user
+            $user = User::find(Auth::user()->id);
             //Get Old picture
-            $oldPicture = User::find(Auth::user()->id)->getAttributes()['picture'];
+            $findPicture = $user->getAttributes()['picture'];
 
-            if( $oldPicture != '' ){
-                if( File::exists(public_path($path.$oldPicture))){
-                    File::delete(public_path($path.$oldPicture));
+            if( $findPicture != '' ){
+                if( File::exists(public_path($path.$findPicture))){
+                    File::delete(public_path($path.$findPicture));
                 }
             }
 
-            //Update DB
-            $update = User::find(Auth::user()->id)->update(['picture'=>$new_image_name]);
+            // Update DB
+            $update = $user->update(['picture'=>$new_image_name]);
 
             if( !$update ){
                 return response()->json(['status'=>0,'msg'=>'Something went wrong, updating picture in db failed.']);

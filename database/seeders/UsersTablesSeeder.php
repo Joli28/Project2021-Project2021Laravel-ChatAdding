@@ -17,10 +17,10 @@ class UsersTablesSeeder extends Seeder
     {
         User::create(
     [
-    'name' => 'Joli',
-    'email' => 'joli@gmail.com',
-    'password' => Hash::make('12joli34'),
-    'image' => '',
+    'name' => 'Newuser',
+    'email' => 'newuser@gmail.com',
+    'password' => Hash::make('11joli22'),
+    'picture' => '',
     'Role' => 0,
 ]);
     }

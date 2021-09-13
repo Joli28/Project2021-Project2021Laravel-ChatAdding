@@ -102,23 +102,26 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table>
+                        <table class="table table-bordered">
                             <thead>
                                 <tr>
-                                    <th>Id<th>
-                                    <th>Name<th>
-                                    <th>Email<th>
-                                    <th>Image<th>
-                                    <th>Edit<th>
-                                    <th>Delete<th>
+                                    <th>Id</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Image</th>
+                                    <th>Edit</th>
+                                    <th>Delete</th>
                                 </tr>
                             </thead>
                             <tbody>
                             <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
+                                <td>1</td>
+                                <td>Name</td>
+                                <td>name@gmail.com</td>
+                                <td><img src="" height="50px" width="50px" alt="Image"></td>
+                                <td><button type="button" value="" class="edit-btn btn btn-success btn-sm">Edit</button></td>
+                                <td><button type="button" value="" class="delete-btn btn btn-danger btn-sm">Delete</button></td>
+                             </tr>
                             </tbody>
                         </table>
                     </div>
@@ -139,6 +142,19 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
+
+        fetchEmployee();
+        function fetchEmployee(){
+            $.ajax({
+                type:"GET",
+                url:"/dashboard",
+                dataType:"json",
+                success:function(response){
+                    console.log(response.employee);
+                }
+            });
+        }
+
 
         $(document).on('submit', '#AddEmployeeForm', function(e){
             e.preventDefault();

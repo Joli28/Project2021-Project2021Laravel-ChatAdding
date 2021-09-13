@@ -48,6 +48,14 @@ class AdminController extends Controller
             ]);
         }
     }
+    public function fetchemployee(){
+        $users = User::all();
+        return response()->json([
+
+            'user'=>$users,
+        ]);
+    }
+
     public function edit($id){
 
     }
@@ -99,8 +107,8 @@ class AdminController extends Controller
             $oldPicture = User::find(Auth::user()->id)->getAttributes()['picture'];
 
             if( $oldPicture != '' ){
-                if( \File::exists(public_path($path.$oldPicture))){
-                    \File::delete(public_path($path.$oldPicture));
+                if( File::exists(public_path($path.$oldPicture))){
+                    File::delete(public_path($path.$oldPicture));
                 }
             }
 

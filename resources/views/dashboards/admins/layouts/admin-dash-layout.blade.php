@@ -88,12 +88,12 @@
       <p>Sidebar content</p>
     </div>
   </aside>
- 
+
   <footer class="main-footer">
-  
+
     </footer>
 </div>
- 
+
 
 <script src="plugins/jquery/jquery.min.js"></script>
 <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -102,13 +102,13 @@
 
 {{-- CUSTOM JS CODES --}}
 <script>
-  
+
   $.ajaxSetup({
      headers:{
        'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')
      }
   });
-  
+
   $(function(){
     /* UPDATE ADMIN PERSONAL INFO */
     $('#AdminInfoForm').on('submit', function(e){
@@ -136,14 +136,14 @@
                 }
            }
         });
-    }); 
+    });
 
     $(document).on('click','#change_picture_btn', function(){
       $('#admin_image').click();
     });
- 
+
     $('#admin_image').ijaboCropTool({
-          preview : '',
+          preview : '.admin-picture',
           setRatio:1,
           allowedExtensions: ['jpg', 'jpeg','png'],
           buttonsText:['CROP','QUIT'],
@@ -157,7 +157,7 @@
             alert(message);
           }
        });
- 
+
   });
 </script>
 </body>

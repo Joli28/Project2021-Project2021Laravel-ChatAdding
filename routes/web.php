@@ -16,6 +16,7 @@ Route::middleware(['middleware'=>'PreventBackHistory'])->group(function (){
 Route::group(['prefix'=>'admin','middleware'=>['isAdmin','auth','PreventBackHistory']], function(){
     Route::get('dashboard',[AdminController::class,'index'])->name('admin.dashboard');
     Route::post('dashboard',[AdminController::class,'store'])->name('admin.dashboard');
+    // Route::get('dashboard',[AdminController::class,'fetchemployee'])->name('admin.fetchEmployee');
 
     Route::get('profile',[AdminController::class,'profile'])->name('admin.profile');
 
@@ -24,7 +25,10 @@ Route::group(['prefix'=>'admin','middleware'=>['isAdmin','auth','PreventBackHist
 });
 
 Route::group(['prefix'=>'user','middleware'=>['isUser','auth','PreventBackHistory']], function(){
+
     Route::get('dashboard',[UserController::class,'index'])->name('user.dashboard');
     Route::get('profile',[UserController::class,'profile'])->name('user.profile');
+    Route::post('update-profile-info',[UserController::class, 'updateInfo'])->name('userUpdateInfo');
+    Route::post('change-profile-picture', [UserController::class, 'updatePicture'])->name('userPictureUpdate');
 });
 
